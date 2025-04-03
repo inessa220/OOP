@@ -9,5 +9,23 @@ class Product:
         """Инициализация объекта"""
         self.name = name
         self.description = description
-        self.price = price
+        self.__price = price
         self.quantity = quantity
+
+    @classmethod
+    def new_product(cls, product_params: dict):
+        """Класс-метод, принимающий параметры товара и добавляет новый продукт"""
+        return cls(**product_params)
+
+    @property
+    def price(self):
+        """Геттер возвращает значение приватного атрибута цены"""
+        return self.__price
+
+    @price.setter
+    def price(self, new_price):
+        """Сеттер для приватного атрибуты цены"""
+        if new_price <= 0:
+            print("Цена не должна быть нулевая или отрицательная")
+        else:
+            self.__price = new_price
