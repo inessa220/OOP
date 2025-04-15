@@ -61,3 +61,5 @@ def test_product_str(product1):
 
 def test_add_product(product1, product2):
     assert product1 + product2 == 1334000
+    with pytest.raises(TypeError):
+        product1 + 1
