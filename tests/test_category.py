@@ -47,3 +47,23 @@ def test_category_products(data_for_counters_categories):
 
 def test_category_str(data_for_counters_categories):
     assert str(data_for_counters_categories) == 'Смартфоны, количество продуктов: 22 шт.'
+
+
+@pytest.fixture
+def first_category() -> Category:
+    return Category(
+        name="Смартфоны",
+        description="Смартфоны, как средство не только коммуникации, но и получения дополнительных функций",
+        products=[
+            Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5),
+            Product("Iphone 15", "512GB, Gray space", 210000.0, 8),
+            Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14),
+        ],
+    )
+
+
+def test_middle_price(first_category: Category) -> None:
+    """Проверка подсчета среднего ценника товаров"""
+    category_empty = Category("Пустая категория", "Категория без продуктов", [])
+    assert first_category.middle_price() == 111629.63
+    assert category_empty.middle_price() == 0

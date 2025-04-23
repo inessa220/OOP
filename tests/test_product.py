@@ -60,3 +60,10 @@ def test_add_product(product1, product2):
     assert product1 + product2 == 1334000
     with pytest.raises(TypeError):
         product1 + 1
+
+
+def test_product_init_invalid() -> None:
+    """Проверка исключения ValueError"""
+    with pytest.raises(ValueError) as e1:
+        Product("Бракованный товар", "Неверное количество", 100.0, 0)
+        assert str(e1.value) == "Товар с нулевым количеством не может быть добавлен"
