@@ -39,3 +39,15 @@ class Category:
         for product in self.__products:
             products_str += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
         return products_str
+
+    def middle_price(self):
+        """Метод, который подсчитывает средний ценник товаров"""
+        price_sum = 0
+        quantity_sum = 0
+        for product in self.__products:
+            price_sum += product.price * product.quantity
+            quantity_sum += product.quantity
+        try:
+            return round(price_sum / quantity_sum, 2)
+        except ZeroDivisionError:
+            return 0
